@@ -1,11 +1,10 @@
 package controllers
 
 import (
-	"math/rand"
-
 	"dias375.dev/m/initializers"
 	"dias375.dev/m/models"
 	"github.com/gin-gonic/gin"
+	uuid "github.com/satori/go.uuid"
 )
 
 func PlanetsCreate(c *gin.Context) {
@@ -18,13 +17,13 @@ func PlanetsCreate(c *gin.Context) {
 
 	c.Bind(&body)
 
-	id := rand.Uint64()
+	id := uuid.NewV4().String()
 
-	planet := models.Planet{UUID: int64(id), Name: body.Name, Climate: body.Climate, Terrain: body.Terrain}
+	planet := models.Planet{ID: id, Name: body.Name, Climate: body.Climate, Terrain: body.Terrain}
 
-	result := initializers.DB.Create(&planet)
+	result := initializers.DB.FirstOrCreate(&planet)
 
-	c.JSON(200, gin.H{
-		"message": "pong",
-	})
+	//result := initializers.DB.Create(&planet)
+
+	c.JSON(200, result)
 }

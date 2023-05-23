@@ -6,7 +6,7 @@ import (
 
 type Planet struct {
 	gorm.Model
-	Uuid    int64
+	ID      string
 	Name    string
 	Climate string
 	Terrain string
