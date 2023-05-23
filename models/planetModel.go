@@ -6,8 +6,8 @@ import (
 
 type Planet struct {
 	gorm.Model
-	ID      string
-	Name    string
-	Climate string
-	Terrain string
+	ID      string `json:"ID"`
+	Name    string `json:"Name"`
+	Climate string `json:"Climate"`
+	Terrain string `json:"Terrain"`
 }

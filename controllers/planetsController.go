@@ -21,9 +21,7 @@ func PlanetsCreate(c *gin.Context) {
 
 	planet := models.Planet{ID: id, Name: body.Name, Climate: body.Climate, Terrain: body.Terrain}
 
-	result := initializers.DB.FirstOrCreate(&planet)
+	initializers.DB.Save(planet)
 
-	//result := initializers.DB.Create(&planet)
-
-	c.JSON(200, result)
+	c.JSON(200, gin.H{"Planet": planet})
 }
